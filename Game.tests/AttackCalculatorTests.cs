@@ -74,4 +74,28 @@ public class AttackCalculatorTests
     }
 
 
+    [Fact]
+    public void TincProuForçaIelDauNoEs20ni1ElDanyEsSimple()
+    {          
+        // arrange
+        var calc = new AttackCalculatorTestable(15);
+        var atk = new Character(
+            armorClass: NoIMPORTA,
+            weaponDamage: 100,
+            race: "Atacant",
+            force: 5);
+        var def = new Character(
+            armorClass: 2,
+            weaponDamage: NoIMPORTA,
+            race: "Defensor",
+            force: NoIMPORTA);
+
+        // act
+        var resultat = calc.CalculateDamage(atk, def);
+
+        // assert
+        Assert.Equal(100, resultat);
+    }
+
+
 }
