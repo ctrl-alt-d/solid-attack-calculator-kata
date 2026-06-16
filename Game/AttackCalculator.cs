@@ -8,11 +8,11 @@ namespace Game
 
         public int CalculateDamage(Character atk, Character def)
         {
-            var defaultAttack = atk.Force;            
-            int dice = random.Next(1, 20);
+            var defaultAttack = atk.Force;
+            int dice = LlençaDau();
             var currentAttack = defaultAttack + dice;
             var damage = atk.damageDealt;
-            
+
 
             if (atk.Force + dice > def.armorClass)
             {
@@ -32,6 +32,11 @@ namespace Game
             {
                 return 0;
             }
+        }
+
+        protected virtual int LlençaDau()
+        {
+            return random.Next(1, 20);
         }
     }
 }

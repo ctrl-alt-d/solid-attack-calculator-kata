@@ -3,14 +3,9 @@ namespace Game.tests;
 public class AttackCalculatorTests 
 {
     [Fact]
-    public void ThisTestShouldPass()
+    public void PodemInstanciarAttackCalculatorTestable()
     {          
-        Assert.Equal(0, 0);
+        var _ = new AttackCalculatorTestable(12);
     }
 
-   [Fact]
-    public void ThisTestShouldFail()
-    {          
-        Assert.Equal(0, 42);
-    }
 }
