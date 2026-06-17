@@ -1,3 +1,5 @@
+using Game.tests.StubClasses;
+
 namespace Game.tests;
 
 public class AttackCalculatorTests 
@@ -5,10 +7,23 @@ public class AttackCalculatorTests
     const int NoIMPORTA = 0;
     [Fact]
     public void SiLaMevaArmaduraEsProuFortaElDanyEs0()
-    {          
+    {
         // arrange
-        var calc = new AttackCalculatorTestable(5);
-        var atk = new Character(
+        var (calc, atk, def) = ArrageObjects(5);
+
+        // act
+        var resultat = calc.CalculateDamage(atk, def);
+
+        // assert
+        Assert.Equal(0, resultat);
+    }
+
+    private static (AttackCalculator, Character, Character) ArrageObjects(int dau)
+    {
+        var dauTrucat = new DauTrucat(dau);
+        var calc = new AttackCalculator(dauTrucat);
+
+                var atk = new Character(
             armorClass: NoIMPORTA,
             weaponDamage: NoIMPORTA,
             race: "Atacant",
@@ -19,18 +34,16 @@ public class AttackCalculatorTests
             race: "Defensor",
             force: NoIMPORTA);
 
-        // act
-        var resultat = calc.CalculateDamage(atk, def);
 
-        // assert
-        Assert.Equal(0, resultat);
+        return (calc, atk, def);
     }
 
     [Fact]
     public void TincProuForçaPeroElDauSurtUn1ElDanyEs0()
     {          
         // arrange
-        var calc = new AttackCalculatorTestable(1);
+        IDice dauTrucat = new DauTrucat(1);
+        var calc = new AttackCalculator(dauTrucat);
         var atk = new Character(
             armorClass: NoIMPORTA,
             weaponDamage: NoIMPORTA,
@@ -54,7 +67,8 @@ public class AttackCalculatorTests
     public void TincProuForçaIelDauSurt20ElDanyEsElDoble()
     {          
         // arrange
-        var calc = new AttackCalculatorTestable(20);
+        IDice dauTrucat = new DauTrucat(20);
+        var calc = new AttackCalculator(dauTrucat);
         var atk = new Character(
             armorClass: NoIMPORTA,
             weaponDamage: 100,
@@ -78,7 +92,8 @@ public class AttackCalculatorTests
     public void TincProuForçaIelDauNoEs20ni1ElDanyEsSimple()
     {          
         // arrange
-        var calc = new AttackCalculatorTestable(15);
+        IDice dauTrucat = new DauTrucat(15);
+        var calc = new AttackCalculator(dauTrucat);
         var atk = new Character(
             armorClass: NoIMPORTA,
             weaponDamage: 100,

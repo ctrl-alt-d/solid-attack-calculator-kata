@@ -1,14 +1,19 @@
-﻿using System;
-
-namespace Game
+﻿namespace Game
 {
+
     public class AttackCalculator
     {
-        Random random = new Random();
+
+        public AttackCalculator(IDice dice)
+        {
+            this.dau = dice;
+        }
+
+        private readonly IDice dau;
 
         public int CalculateDamage(Character atk, Character def)
         {
-            int dice = LlençaDau();
+            int dice = dau.LlençaDau();
 
             if (!TincMesForçaQueArmadura(atk, def, dice))
                 return 0;
@@ -27,9 +32,6 @@ namespace Game
             return atk.Force + dice > def.armorClass;
         }
 
-        protected virtual int LlençaDau()
-        {
-            return random.Next(1, 20);
-        }
+
     }
 }
